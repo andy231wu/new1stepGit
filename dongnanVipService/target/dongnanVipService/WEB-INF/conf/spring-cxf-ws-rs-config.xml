@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- 
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+       xmlns:jaxws="http://cxf.apache.org/jaxws" 
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://cxf.apache.org/jaxrs 
+           http://cxf.apache.org/schemas/jaxrs.xsd
+           http://cxf.apache.org/jaxws 
+           http://cxf.apache.org/schemas/jaxws.xsd">
+          
+          <import resource="classpath:META-INF/cxf/cxf.xml"/> 
+           import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" / 
+          <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/> 
+-->      
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+    xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://cxf.apache.org/jaxrs
+	http://cxf.apache.org/schemas/jaxrs.xsd
+	http://cxf.apache.org/jaxws
+	http://cxf.apache.org/schemas/jaxws.xsd">
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+   
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />   
+    
+          <!-- cxf ws -->
+          <jaxws:endpoint id="bankAccountService"
+	        implementor="au.com.new1step.apps.vip.ws.service.impl.BankAccountServiceImpl" 
+	        address="/bankAccountService/"></jaxws:endpoint>
+	        
+	      <jaxws:endpoint id="entityService"
+	        implementor="au.com.new1step.apps.vip.ws.service.impl.EntityServiceImpl" 
+	        address="/entityService/"></jaxws:endpoint>  
+        
+          <!-- cxf rs -->
+          
+           <jaxrs:server address="/bookService" id="bookService"> 
+	          <jaxrs:serviceBeans>    
+	                <ref bean="bookserviceClass"></ref>
+	          </jaxrs:serviceBeans>  
+	      </jaxrs:server> 
+          <!-- 
+          <jaxrs:providers>
+			   <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+		 </jaxrs:providers>
+		 -->
+		  <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+		 <!-- 
+			<jaxrs:providers>
+			   <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+			</jaxrs:providers>
+		 -->
+
+          
+          
+          <jaxrs:server address="/orderService" id="orderService"> 
+	          <jaxrs:serviceBeans>    
+	                <ref bean="orderClass"></ref>
+	          </jaxrs:serviceBeans>  
+	          <jaxrs:providers>
+		            <ref bean="jsonProvider"/>
+		      </jaxrs:providers>
+		      <!-- 
+		       <jaxrs:features>
+		            <cxf:logging/>
+		       </jaxrs:features>
+	          -->
+	          <!-- 
+	          <jaxrs:extensionmappings>  
+	             <entry key="xml" value="application/xml"> </entry>
+	          </jaxrs:extensionmappings>  
+	          -->
+          </jaxrs:server> 
+	          
+	      <bean id="orderClass" class="au.com.new1step.apps.vip.rs.service.impl.OrderInfoImpl" ></bean> 
+	      <bean id="bookserviceClass" class="au.com.new1step.apps.vip.rs.service.impl.BookServiceImpl"/>         
+          
+ </beans>
