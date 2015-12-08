@@ -69,7 +69,7 @@
     </dependency>
   </dependencies>
   <build>
-       <finalName>dongnanVipServiceClient</finalName> 
+       <finalName>dongnanVipClient</finalName> 
 	    <plugins>
 	      <plugin>
 	        <artifactId>maven-compiler-plugin</artifactId>
