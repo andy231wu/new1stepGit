@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>au.com.new1step.apps.vip</groupId>
+  <artifactId>wsdlgenerator</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>wsdlgenerator</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <cxf.version>3.0.1</cxf.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <finalName>dongnanVipServer</finalName> 
+	    <plugins>
+	      <plugin>
+	         <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-compiler-plugin</artifactId>
+	        <configuration>
+	          <source>1.7</source>
+	          <target>1.7</target>
+	        </configuration>
+	      </plugin>   
+	     	      
+	      <plugin>
+		        <groupId>org.apache.cxf</groupId>
+		        <artifactId>cxf-java2ws-plugin</artifactId>
+		        <version>${cxf.version}</version>
+		        <dependencies>
+		          <dependency>
+		            <groupId>org.apache.cxf</groupId>
+		            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+		            <version>${cxf.version}</version>
+		          </dependency>
+		        </dependencies>
+		        <executions>
+		          <execution>
+		            <id>generate-test-resources1</id>
+		            <phase>generate-test-resources</phase>		            
+		            <configuration>
+		              <className>au.com.new1step.apps.vip.ws.service.IFBankAccountService</className>
+		              <outputFile>${basedir}/src/main/resources/wsdl/IFBankAccountService.wsdl</outputFile>
+		              <genWsdl>true</genWsdl>
+		              <verbose>true</verbose>
+		            </configuration>
+		            <goals>
+		              <goal>java2ws</goal>
+		            </goals>
+		          </execution>
+		          
+		          <execution>
+		            <id>generate-test-resources2</id>
+		            <phase>generate-test-resources</phase>		            
+		            <configuration>
+		              <className>au.com.new1step.apps.vip.ws.service.IFEntityService</className>
+		              <outputFile>${basedir}/src/main/resources/wsdl/IFEntityService.wsdl</outputFile>
+		              <genWsdl>true</genWsdl>
+		              <verbose>true</verbose>
+		            </configuration>
+		            <goals>
+		              <goal>java2ws</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		      </plugin>
+	      
+	    </plugins>
+
+  </build>
+</project>
