@@ -1,0 +1,4 @@
+url:
+http://localhost/dongnanws/services/memberService/insertMember
+feed:
+{"member":{"memId":4,"name":"Andy Wu","phone":"0421991372","address":"4a Gross Ave Umina Beach","mark":15,"comment":"this is Id 4"}}

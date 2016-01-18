@@ -1,0 +1,5 @@
+au/com/new1step/apps/rs/model/UploadInfo.class
+au/com/new1step/apps/rs/model/UploadResponse.class
+au/com/new1step/apps/rs/model/UploadRequest.class
+au/com/new1step/apps/rs/service/impl/UploadFileServiceImpl.class
+au/com/new1step/apps/rs/service/UploadFileService.class
