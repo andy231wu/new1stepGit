@@ -1,9 +1,0 @@
-au/com/new1step/apps/vip/rs/model/MemberResponse.class
-au/com/new1step/apps/vip/rs/dao/impl/MemberDaoImpl.class
-au/com/new1step/apps/vip/rs/service/MemberService.class
-au/com/new1step/apps/vip/rs/service/impl/MemberServiceImpl.class
-au/com/new1step/apps/vip/rs/model/MemberRequest.class
-au/com/new1step/apps/dynamic/table/CustomNamingStrategy.class
-au/com/new1step/apps/vip/rs/model/Member.class
-au/com/new1step/apps/vip/rs/exception/MemberRsException.class
-au/com/new1step/apps/vip/rs/dao/MemberDao.class

@@ -15,19 +15,23 @@ import au.com.new1step.apps.vip.rs.model.Member;
 @Repository
 public class MemberDaoImpl extends AbstractSessionUtil implements MemberDao {
 	@Override
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public Member fetchMemberById(Integer memId) throws MemberRsException{		  
        Session session = sessionFactory.getCurrentSession();
-       List<Member> members = session.createCriteria(Member.class)
-							    	    .add(Restrictions.eq("memId", memId))								    	    
-							    	    .list();           
+       // method 1
+       Member member = (Member)session.createCriteria(Member.class)
+							    	    .add(Restrictions.eq("memId", memId))
+							    	   // .add(Restrictions.idEq(memId)) alw: you can using the statement as well
+							    	    .uniqueResult();          
+		//session.clear();						    	    
+        return member;  
        
-       if(members == null || members.size() == 0){
-    	   throw new MemberRsException("Member Id: " + memId + " Not Found.");
-       }
-		session.clear();						    	    
-        return members.get(0);            
-		
+       /*
+       // method 2;
+       Member member = (Member)session.createQuery(
+    		          " from Member where memId = '" + memId + "'").uniqueResult();
+       return member;
+       */
 	}
 	
 	@Override
@@ -127,15 +131,30 @@ public class MemberDaoImpl extends AbstractSessionUtil implements MemberDao {
 	}
 	@Override
 	public void updateMember(Member member) throws MemberRsException{
+		/* method 1
 		fetchMemberById(member.getMemId()); // check if the member is existing
 		Session session = sessionFactory.getCurrentSession();
 		session.update(member); 
+		*/
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(member);
 		
 	}
 	@Override
 	public void deleteMember(Member member) throws MemberRsException{
-		fetchMemberById(member.getMemId());	// check if the member is existing		
 		Session session = sessionFactory.getCurrentSession();		
-		session.delete(member);  
+		/* method 1
+		Member result = (Member)session.createCriteria(Member.class)
+	    	    .add(Restrictions.eq("memId", member.getMemId()))								    	    
+	    	    .uniqueResult();
+		*/
+		
+	        session.delete(member);
+	     /* may be not need read first
+		Member result = (Member)session.get(Member.class, member.getMemId());
+		if(result != null){
+		   session.delete(result); 
+		}
+		*/
 	}	
 }

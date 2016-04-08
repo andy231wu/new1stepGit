@@ -1,10 +1,8 @@
-/home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/dao/impl/MemberDaoImpl.java
 /home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/model/Member.java
+/home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/dao/impl/MemberDaoImpl.java
 /home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/dao/MemberDao.java
 /home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/model/MemberResponse.java
 /home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/exception/DongnanRsException.java
-/home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/service/UploadFileService.java
 /home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/model/MemberRequest.java
-/home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/service/UploadFileServiceImpl.java
 /home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/service/impl/MemberServiceImpl.java
 /home/andy/workspaces/new1stepGit/dongnanws/src/main/java/au/com/new1step/apps/vip/rs/service/MemberService.java

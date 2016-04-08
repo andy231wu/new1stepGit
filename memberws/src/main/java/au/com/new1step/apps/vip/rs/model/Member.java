@@ -1,19 +1,32 @@
 package au.com.new1step.apps.vip.rs.model;
+import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;  
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement; 
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 @XmlRootElement(name = "member")
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) WILL ALWAYS INGNORE, NOT GOOD
 @Entity
-//@Table(name="member")
-public class Member {	
+//@Table(name="member") if you used customer naming strategy, @Table should comment out
+public class Member implements Serializable {	
+	
+	private static final long serialVersionUID = -5898014969117364132L;
+
 	@Id
-	@Column(name="MEMID", unique = true, nullable = false)
+	@Column(name="memId", unique = true, nullable = false)
 	@GeneratedValue
 	private int memId; 
 	
@@ -45,11 +58,15 @@ public class Member {
 	private float varRate;
 	@Column(name="fixRate")
 	private float fixRate;
-	
-	//@Column(name="dateCreated", nullable = false)
-	@Column(name="dateCreated")
+	@Column(name="dateCreated", nullable = false)	
+	//@Version() ???
 	private Date dateCreated;
 	
+	
+	//@JsonSerialize(include = JsonSerialize.Inclusion.NON_EMPTY) not working for serialization issue
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)	
+	@JoinColumn(name="userId")	
+	private UserInfo userInfo;
 	
 	public int getMemId() {
 		return memId;
@@ -147,6 +164,12 @@ public class Member {
 	}
 	public void setVarRate(float varRate) {
 		this.varRate = varRate;
+	}
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
 	}
 	
 }

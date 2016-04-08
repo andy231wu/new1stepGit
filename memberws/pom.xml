@@ -75,8 +75,15 @@
 	    <dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-xc</artifactId>
-			<version>1.9.13</version>
+			<version>1.9.13</version>			
 		</dependency>
+		
+		<!--  json mapper -->
+      <dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+	  </dependency>
       
       	    <!-- Hibernate -->
 	   

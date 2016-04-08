@@ -36,8 +36,20 @@
 			</jaxrs:providers>
 		 -->
 		 
+		 <!-- alw original
 		  <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
-		 
+		  -->
+		  <!-- reference only not working for me
+	     <bean id="jacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper">
+		    <property name="serializationInclusion" value="NON_NULL"/>
+		</bean>
+		-->
+		 <!-- deal null lazy object by CustomObjectMapper  to disable the fail_on_empty beans-->
+		<bean id="jacksonObjectMapper" class="au.com.new1step.apps.object.mapper.CustomObjectMapper"/>
+		<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+		    <property name="mapper" ref="jacksonObjectMapper"/>
+		</bean>
+               
                   
           <jaxrs:server address="/memberService" id="memberService"> 
 	          <jaxrs:serviceBeans>    
@@ -48,6 +60,17 @@
 		      </jaxrs:providers>
 		  </jaxrs:server> 	          
 	     
+	     <jaxrs:server address="/loginService" id="userInfoService"> 
+	          <jaxrs:serviceBeans>    
+	                <ref bean="userInfoServiceClass"></ref>
+	          </jaxrs:serviceBeans>  
+	          <jaxrs:providers>
+		            <ref bean="jsonProvider"/>
+		      </jaxrs:providers>
+		  </jaxrs:server> 	
+		  
 	      <bean id="memberserviceClass" class="au.com.new1step.apps.vip.rs.service.impl.MemberServiceImpl"/>
+	      <bean id="userInfoServiceClass" class="au.com.new1step.apps.vip.rs.service.impl.UserInfoServiceImpl"/>
 	     
+	    
  </beans>

@@ -1,20 +1,6 @@
 package au.com.new1step.apps.vip.rs.dao;
 
 import java.util.List;
-
-
-
-
-
-
-
-
-
-
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Repository;
-
 import au.com.new1step.apps.vip.rs.exception.MemberRsException;
 import au.com.new1step.apps.vip.rs.model.Member;
 
