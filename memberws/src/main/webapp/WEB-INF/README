@@ -1,0 +1,10 @@
+This project include following functions:
+1) create dynamic Table name - e.g demows_member by CustomNamingStrategy.java
+2) deal with Hibernate Lazy null exception by CustomObjectMapper.java
+3) perform oneToMany and oneToOne relationship
+4) add  authentication Security
+
+TODO:
+1) test ManyToOne, ManyToMany relationship
+2) improve to using user customer Login Form for security
+3) Test for password encryption 
