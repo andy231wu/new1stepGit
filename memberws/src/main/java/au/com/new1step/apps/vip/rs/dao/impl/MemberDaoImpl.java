@@ -2,7 +2,9 @@ package au.com.new1step.apps.vip.rs.dao.impl;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -10,13 +12,15 @@ import org.springframework.stereotype.Repository;
 import au.com.new1step.apps.util.AbstractSessionUtil;
 import au.com.new1step.apps.vip.rs.dao.MemberDao;
 import au.com.new1step.apps.vip.rs.exception.MemberRsException;
+import au.com.new1step.apps.vip.rs.model.Address;
 import au.com.new1step.apps.vip.rs.model.Member;
+import au.com.new1step.apps.vip.rs.model.UserInfo;
 
 @Repository
 public class MemberDaoImpl extends AbstractSessionUtil implements MemberDao {
 	@Override
 	//@SuppressWarnings("unchecked")
-	public Member fetchMemberById(Integer memId) throws MemberRsException{		  
+	public Member fetchMemberById(Long memId) throws MemberRsException{		  
        Session session = sessionFactory.getCurrentSession();
        // method 1
        Member member = (Member)session.createCriteria(Member.class)
@@ -69,8 +73,10 @@ public class MemberDaoImpl extends AbstractSessionUtil implements MemberDao {
 	@SuppressWarnings("unchecked")
 	public List<Member> fetchAllMembers(String appId){
 		Session session = sessionFactory.getCurrentSession();
-		String sql = "from Member mem where mem.appId = '" + appId + "' order by mem.name asc"; 
-        return session.createQuery(sql).list();  
+		String sql = "from Member mem where mem.appId = :appId order by mem.name asc";         
+        Query query = session.createQuery(sql);
+        query.setParameter("appId", appId);
+		return query.list();  
 	}
 	
 	@Override
@@ -119,25 +125,55 @@ public class MemberDaoImpl extends AbstractSessionUtil implements MemberDao {
 	}
 	
 	@Override
-	public Integer insertMember(Member member) throws MemberRsException{		
+	public Long insertMember(Member member) throws MemberRsException{		
 		Session session = sessionFactory.getCurrentSession();
 		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());		
 		member.setDateCreated(date);
-	    Integer id = (Integer)session.save(member);	
-	    if(id < 1){
+		// one to many
+		Set<Address> addresses = member.getAddresses();	 
+		if(addresses != null && addresses.size() != 0){
+		    for(Address addr : addresses){	    
+		    	addr.setMember(member);	    	
+		    }
+		}
+		// one to one
+		UserInfo user = member.getUserInfo();
+		if(user != null){
+			user.setMember(member);	
+		}
+	    
+	    Long id  = (Long)session.save(member);
+	  
+	    if(id <= 0){
 	    	throw new MemberRsException("Fail to insert Member.");
 	    }
+	   
 	    return id;
+	    
 	}
 	@Override
-	public void updateMember(Member member) throws MemberRsException{
-		/* method 1
-		fetchMemberById(member.getMemId()); // check if the member is existing
+	public void updateMember(Member member) throws MemberRsException{		
 		Session session = sessionFactory.getCurrentSession();
-		session.update(member); 
-		*/
-		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(member);
+		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());		
+		member.setDateCreated(date);
+		
+		// this will avoid null value of memId in address table
+		// it required to pass addressid, so address can be updated
+		// otherwise it will add new address
+		Set<Address> addresses = member.getAddresses();	 
+		if(addresses != null && addresses.size() != 0){
+		    for(Address addr : addresses){	    
+		    	addr.setMember(member);	    	
+		    }
+		}
+		UserInfo user = member.getUserInfo();
+		if(user != null){
+			user.setMember(member);	
+		}
+	   
+	    
+		//session.merge(member);
+		session.update(member);
 		
 	}
 	@Override
@@ -149,12 +185,11 @@ public class MemberDaoImpl extends AbstractSessionUtil implements MemberDao {
 	    	    .uniqueResult();
 		*/
 		
-	        session.delete(member);
-	     /* may be not need read first
+	     
 		Member result = (Member)session.get(Member.class, member.getMemId());
 		if(result != null){
 		   session.delete(result); 
 		}
-		*/
+		
 	}	
 }

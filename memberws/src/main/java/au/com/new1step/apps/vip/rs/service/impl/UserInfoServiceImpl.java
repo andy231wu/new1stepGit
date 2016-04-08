@@ -7,8 +7,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import au.com.new1step.apps.vip.rs.dao.UserInfoDao;
 import au.com.new1step.apps.vip.rs.model.UserInfo;
@@ -16,10 +19,12 @@ import au.com.new1step.apps.vip.rs.model.UserInfoRequest;
 import au.com.new1step.apps.vip.rs.model.UserInfoResponse;
 import au.com.new1step.apps.vip.rs.service.UserInfoService;
 
+
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	private UserInfoDao userInfoDao;
+	
 	
 	private final static Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 	
@@ -105,4 +110,30 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 		return response;
 	}
+	
+	/*
+	@Override 
+	@Transactional
+	public UserInfoResponse login(UserInfoRequest request){
+		UserInfoResponse response = new UserInfoResponse();
+		try{
+		//	SecurityManager mgr = new SecurityManager();
+			manager.login(request.getUserInfo().getUserId(), request.getUserInfo().getPassword());
+			
+		     String userId = request.getUserInfo().getUserId();
+		     List<UserInfo> userInfos = new ArrayList<UserInfo>();
+		     UserInfo userInfo = new UserInfo();
+		     userInfo.setUserId(userId);
+		     userInfos.add(userInfo);
+		     response.setUserInfos(userInfos);
+		     
+		     logger.info("Success - login.");
+		}catch(Exception ex){
+			 response.setSuccess(false);
+			 response.setErrorMessage(ex.getClass() + ": " + ex.getMessage());
+			 logger.info("Error - login: " + ex.getMessage());
+		}
+		return response;
+	}
+	*/
 }

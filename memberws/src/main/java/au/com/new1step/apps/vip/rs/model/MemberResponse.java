@@ -7,7 +7,6 @@ public class MemberResponse {
 	private String errorMessage;
 	private Boolean success = true;
 	
-	
 	public String getErrorMessage() {
 		return errorMessage;
 	}

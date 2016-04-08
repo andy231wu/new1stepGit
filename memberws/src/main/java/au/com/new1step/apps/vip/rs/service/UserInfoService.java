@@ -34,5 +34,10 @@ public interface UserInfoService {
 	@POST
 	@Path("/deleteUserInfo")
 	public UserInfoResponse deleteUserInfo(UserInfoRequest request);
-	
+
+	/*
+	@POST
+	@Path("/login")
+	public UserInfoResponse login(UserInfoRequest request);
+	*/
 }

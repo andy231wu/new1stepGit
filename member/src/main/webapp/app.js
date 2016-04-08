@@ -15,10 +15,17 @@ var app = angular.module('app').run(['$rootScope', '$http', function($rootScope,
 var app = angular.module( "app", [ ] );
 
 app.config( function( $routeProvider ) {
-  $routeProvider.when( "/", {
-    templateUrl: "index.jsp",
-    controller: "MainController"
-  } );
+  $routeProvider
+     .when( "/", 
+    		 {
+			    templateUrl: "index.jsp",
+			    controller: "MainController"
+			  } )
+      .when("/login", {
+    	  templateUrl: "login.jsp",
+    	  controller: "LoginController"
+      })
+      .otherwise({redirectTo: '/login'});
 } );
 
 app.factory( "accommodation", function( ) {

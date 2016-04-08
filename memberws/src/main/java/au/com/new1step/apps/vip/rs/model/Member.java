@@ -1,6 +1,8 @@
 package au.com.new1step.apps.vip.rs.model;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;  
 import javax.persistence.Column;
@@ -9,13 +11,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement; 
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+//import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+//import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @XmlRootElement(name = "member")
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) WILL ALWAYS INGNORE, NOT GOOD
@@ -27,8 +33,8 @@ public class Member implements Serializable {
 
 	@Id
 	@Column(name="memId", unique = true, nullable = false)
-	@GeneratedValue
-	private int memId; 
+	@GeneratedValue(strategy = IDENTITY)
+	private Long memId; 
 	
 	@Column(name="name", nullable = false)
 	private String name;
@@ -41,9 +47,7 @@ public class Member implements Serializable {
 	@Column(name="email")
 	private String email;
 	@Column(name="fileUrl")
-	private String fileUrl;	
-	@Column(name="address")
-	private String address;
+	private String fileUrl;		
 	@Column(name="mark")
 	private int mark; 
 	@Column(name="comment")
@@ -62,16 +66,16 @@ public class Member implements Serializable {
 	//@Version() ???
 	private Date dateCreated;
 	
-	
-	//@JsonSerialize(include = JsonSerialize.Inclusion.NON_EMPTY) not working for serialization issue
-	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)	
-	@JoinColumn(name="userId")	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy="member", cascade=CascadeType.ALL)
 	private UserInfo userInfo;
 	
-	public int getMemId() {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="member", cascade=CascadeType.ALL)
+	private Set<Address> addresses = new HashSet<Address>(0);
+	
+	public Long getMemId() {
 		return memId;
 	}
-	public void setMemId(int memId) {
+	public void setMemId(Long memId) {
 		this.memId = memId;
 	}
 	public String getName() {
@@ -86,12 +90,7 @@ public class Member implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	
 	public int getMark() {
 		return mark;
 	}
@@ -165,11 +164,19 @@ public class Member implements Serializable {
 	public void setVarRate(float varRate) {
 		this.varRate = varRate;
 	}
+	
 	public UserInfo getUserInfo() {
 		return userInfo;
 	}
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
+	}
+	
+	public Set<Address> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(Set<Address> addresses) {
+		this.addresses = addresses;
 	}
 	
 }

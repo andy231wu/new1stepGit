@@ -5,17 +5,21 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:jaxws="http://cxf.apache.org/jaxws"
     xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+    xmlns:cxf="http://cxf.apache.org/core"
+    xmlns:security="http://www.springframework.org/schema/security"
     xsi:schemaLocation="
 	http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd	
+	http://www.springframework.org/schema/security 
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd
 	http://cxf.apache.org/jaxrs
 	http://cxf.apache.org/schemas/jaxrs.xsd
 	http://cxf.apache.org/jaxws
 	http://cxf.apache.org/schemas/jaxws.xsd">
-	
+		
     <import resource="classpath:META-INF/cxf/cxf.xml" />   
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />   
-    
+   
     <!-- how ???
      <cxf:bus>
         <cxf:features>
@@ -35,10 +39,7 @@
 			   <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
 			</jaxrs:providers>
 		 -->
-		 
-		 <!-- alw original
-		  <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
-		  -->
+		 		 
 		  <!-- reference only not working for me
 	     <bean id="jacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper">
 		    <property name="serializationInclusion" value="NON_NULL"/>
@@ -49,7 +50,14 @@
 		<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
 		    <property name="mapper" ref="jacksonObjectMapper"/>
 		</bean>
-               
+		
+        <!-- Cxf Jaxb Provider -->
+	    <!-- bean id="jaxbXmlProvider" class="org.apache.cxf.jaxrs.proviacder.JAXBElementProvider" scope="prototype" / -->	    
+	    <!-- Cxf Cors filter (cross domain purpose)-->
+	    <!-- bean id="cors-filter" class="org.apache.cxf.jaxrs.cors.CrossOriginResourceSharingFilter"/ -->
+        
+        <!-- cxf exception generator -->
+	    <bean id="exceptionProvider" class="au.com.new1step.apps.vip.security.SecurityExceptionMapper" />       
                   
           <jaxrs:server address="/memberService" id="memberService"> 
 	          <jaxrs:serviceBeans>    
@@ -57,9 +65,31 @@
 	          </jaxrs:serviceBeans>  
 	          <jaxrs:providers>
 		            <ref bean="jsonProvider"/>
+		            <!-- security -->
+		            <!-- alw: reference
+		            <ref bean="jaxbXmlProvider" />
+		            <ref bean="cors-filter" />
+		            -->		          
+		            <ref bean="exceptionProvider"/>
 		      </jaxrs:providers>
+		      
+		      <!-- below may not need -->
+		      <!-- 
+		       <jaxrs:features>
+		            <cxf:logging/>
+		        </jaxrs:features>
+		        -->
+		        <!-- Keeping extention type -->
+		        <!-- 
+		        <jaxrs:extensionMappings>
+		            <entry key="json" value="application/json" />
+		            <entry key="xml" value="application/xml" />
+		            <entry key="html" value="text/html"/>
+		            <entry key="feed" value="application/atom+xml"/>
+		        </jaxrs:extensionMappings>
+		        -->
 		  </jaxrs:server> 	          
-	     
+	    
 	     <jaxrs:server address="/loginService" id="userInfoService"> 
 	          <jaxrs:serviceBeans>    
 	                <ref bean="userInfoServiceClass"></ref>
@@ -67,10 +97,11 @@
 	          <jaxrs:providers>
 		            <ref bean="jsonProvider"/>
 		      </jaxrs:providers>
-		  </jaxrs:server> 	
+		  </jaxrs:server> 
+		 
 		  
 	      <bean id="memberserviceClass" class="au.com.new1step.apps.vip.rs.service.impl.MemberServiceImpl"/>
 	      <bean id="userInfoServiceClass" class="au.com.new1step.apps.vip.rs.service.impl.UserInfoServiceImpl"/>
-	     
 	    
+	   	
  </beans>

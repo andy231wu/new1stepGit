@@ -28,8 +28,10 @@
 </mvc:message-converters>   
    -->
    
-    <import resource="hibernateMapping.xml"/>  
+    <import resource="hibernate.cfg.xml"/>  
     <import resource="member.xml"/>
+    <!-- import resource="security-beans.xml"/ -->
+    <!-- import resource="security-context.xml"/ -->
      
  
   

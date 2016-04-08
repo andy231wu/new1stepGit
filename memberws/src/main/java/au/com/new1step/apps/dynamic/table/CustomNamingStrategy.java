@@ -5,6 +5,7 @@ import org.springframework.context.MessageSource;
 
 public class CustomNamingStrategy extends ImprovedNamingStrategy{
 	// this class used to create dynamic data table name
+	// then enclude it in sessionFactory bean
 	private static final long serialVersionUID = 1L;
 		
     private MessageSource messageSource;

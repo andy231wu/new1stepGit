@@ -192,7 +192,7 @@ public class MemberServiceImpl implements MemberService {
 	public MemberResponse insertMember(MemberRequest request){
 		MemberResponse response = new MemberResponse();
 		try{
-		     int id = memberDao.insertMember(request.getMember());
+		     Long id = memberDao.insertMember(request.getMember());
 		     List<Member> members = new ArrayList<Member>();
 		     Member member = new Member();
 		     member.setMemId(id);

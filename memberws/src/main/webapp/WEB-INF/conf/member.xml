@@ -13,8 +13,6 @@
    
   
   <context:annotation-config />
-  
-  
 
   <context:component-scan base-package="au.com.new1step.apps.vip.rs.model" />
   <context:component-scan base-package="au.com.new1step.apps.vip.rs.dao" />
@@ -22,6 +20,7 @@
   <context:component-scan base-package="au.com.new1step.apps.vip.rs.service" />
   <context:component-scan base-package="au.com.new1step.apps.vip.rs.service.impl" />
   <context:component-scan base-package="au.com.new1step.apps.dynamic.table" />
+  <context:component-scan base-package="au.com.new1step.apps.vip.security" />
  
  
  
