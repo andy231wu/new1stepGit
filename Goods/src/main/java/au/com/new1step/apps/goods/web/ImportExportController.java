@@ -128,6 +128,7 @@ public class ImportExportController {
 			rows.add(field);			
 			rows.add("</DateShipped>");
 			
+			
 			rows.add("<DeliveryState>");
 			rows.add(String.valueOf(row.get(5)));
 			rows.add("</DeliveryState>");
