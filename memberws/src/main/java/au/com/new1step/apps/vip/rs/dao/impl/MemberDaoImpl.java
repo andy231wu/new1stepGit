@@ -170,9 +170,7 @@ public class MemberDaoImpl extends AbstractSessionUtil implements MemberDao {
 		if(user != null){
 			user.setMember(member);	
 		}
-	   
-	    
-		//session.merge(member);
+		
 		session.update(member);
 		
 	}

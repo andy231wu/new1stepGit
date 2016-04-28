@@ -69,6 +69,7 @@ public class Member implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY, mappedBy="member", cascade=CascadeType.ALL)
 	private UserInfo userInfo;
 	
+	// for using orphanRemoval = true, need to change to JPA2.0 or later
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="member", cascade=CascadeType.ALL)
 	private Set<Address> addresses = new HashSet<Address>(0);
 	
