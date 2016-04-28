@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+  <definition name="homePage" extends="baseLayout">
+      <put-attribute name="title"  value="Home"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/home.jsp"/>      
+  </definition>  
+  
+  <definition name="errorPage" extends="baseLayout">
+      <put-attribute name="title"  value="Overview"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/others/error.jsp"/>      
+  </definition> 
+  
+  <!-- application master login -->
+   <definition name="loginPage" extends="baseLayout">
+      <put-attribute name="title"  value="Overview"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/others/login.jsp"/>      
+  </definition> 
+  
+   <definition name="appMasterLoginSuccessPage" extends="baseLayout">
+      <put-attribute name="title"  value="Overview"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/others/appMasterLoginSuccess.jsp"/>      
+  </definition> 
+ 
+ <!-- 
+  <definition name="checkPage" extends="baseLayout">
+      <put-attribute name="title"  value="Overview"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/sendx/others/check.jsp"/>      
+  </definition> 
+  
+  <definition name="siteMapPage" extends="baseLayout">
+      <put-attribute name="title"  value="Overview"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/sendx/others/siteMap.jsp"/>      
+  </definition> 
+  -->
+</tiles-definitions>

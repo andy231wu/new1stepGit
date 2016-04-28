@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+	
+	<bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="465" />
+		<property name="protocol" value="smtps" />	
+		<property name="username" value="andy231wu@gmail.com" />
+		<property name="password" value="leanne231" />
+		<property name="javaMailProperties">
+		<props>
+		    <prop key="mail.smtps.auth">true</prop>
+            <prop key="mail.smtps.starttls.enable">true</prop>
+            <prop key="mail.smtps.debug">true</prop>			
+		</props>
+		</property>
+	</bean>
+	
+    <bean id="emailSenderManager" class="au.com.new1step.system.logic.EmailSenderManager">
+			<property name="mailSender" ref="mailSender" />
+			
+			<!--
+			<property name="userEmailIds">
+				<arrayList>
+					<value>andy231wu@gmail.com</value>					
+				</arrayList>
+			</property>	
+			-->		
+    </bean>
+    
+    
+		
+</beans>  

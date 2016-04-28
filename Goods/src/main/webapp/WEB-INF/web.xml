@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" >
+
+  <display-name>${project.name} - ${project.version}</display-name>
+  <description>Goods Request Management</description>
+
+  <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+               /WEB-INF/conf/applicationContext.xml               
+        </param-value>
+  </context-param>	
+   <!-- /WEB-INF/conf/applicationContext.xml -->
+   
+  <filter>  
+    <filter-name>encodingFilter</filter-name>  
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+    <init-param>  
+       <param-name>encoding</param-name>  
+       <param-value>UTF-8</param-value>  
+    </init-param>  
+    <init-param>  
+       <param-name>forceEncoding</param-name>  
+       <param-value>true</param-value>  
+    </init-param>  
+  </filter>  
+  <filter-mapping>  
+     <filter-name>encodingFilter</filter-name>  
+     <url-pattern>/*</url-pattern>  
+ </filter-mapping> 
+ 
+ <!-- 
+   <filter>
+		<filter-name>utf8Filter</filter-name>
+		<filter-class>au.com.new1step.apps.filters.Utf8Filter</filter-class>
+		
+		<init-param>
+			<param-name>my-param</param-name>
+			<param-value>my-param-value</param-value>
+		</init-param>
+		
+	</filter>
+	
+    <filter-mapping>
+		<filter-name>utf8Filter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+  -->
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>goods</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- manual to config servlet -->
+   
+    <init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/conf/goods-servlet.xml				
+			</param-value>
+	</init-param> 
+  
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>goods</servlet-name>
+    <url-pattern>*.htm</url-pattern>   
+  </servlet-mapping>
+  
+  <jsp-config>
+    <jsp-property-group>
+        <url-pattern>*.jsp</url-pattern>
+        <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+  </jsp-config>
+  
+  <!-- 
+  <servlet-mapping>
+    <servlet-name>sendx</servlet-name>
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+  -->
+   
+   
+   <!-- csv download and upload servlet -->
+  
+  <!--  
+  <servlet>      
+    <servlet-name>csvServiceServlet</servlet-name>
+    <servlet-class>au.com.new1step.apps.goods.servlet.CSVServiceServlet</servlet-class>
+    <load-on-startup>2</load-on-startup> 
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>csvServiceServlet</servlet-name>
+    <url-pattern>/xyzCompany/csvDownload</url-pattern>
+  </servlet-mapping>
+ 
+  <servlet-mapping>
+    <servlet-name>csvServiceServlet</servlet-name>
+    <url-pattern>/xyzCompany/csvUpload</url-pattern>
+  </servlet-mapping> 
+  -->
+  <welcome-file-list>
+    <welcome-file>
+      index.jsp
+    </welcome-file>
+  </welcome-file-list>
+  
+  <!-- this can be ignore, or you can define your tld and configure as below
+  <jsp-config>
+    <taglib>
+      <taglib-uri>/spring</taglib-uri>
+      <taglib-location>/WEB-INF/tld/spring-form.tld</taglib-location>
+    </taglib>
+  </jsp-config>  
+  -->
+</web-app>

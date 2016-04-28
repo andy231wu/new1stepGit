@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>  
+  
+  <!-- application users -->
+   <definition name="usersPage" extends="baseLayout">
+      <put-attribute name="title"  value="Users"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/user/users.jsp"/>      
+  </definition> 
+  
+   <!-- upload images -->
+  <definition name="requestListPage" extends="baseLayout">
+      <put-attribute name="title"  value="Request List"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/request/requestList.jsp"/>      
+  </definition> 
+ 
+   <definition name="successUploadPage" extends="baseLayout">
+      <put-attribute name="title"  value="Upload"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/upload/successUpload.jsp"/>      
+  </definition> 
+  
+ <!-- contact us -->
+  <definition name="contactUsFormPage" extends="baseLayout">
+      <put-attribute name="title"  value="Contact Us"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/contact/contactUsForm.jsp"/>      
+  </definition> 
+ 
+   <definition name="contactUsSuccessPage" extends="baseLayout">
+      <put-attribute name="title"  value="Contact Us"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/contact/contactUsSuccess.jsp"/>      
+  </definition> 
+  
+   <definition name="contactAppMasterFormPage" extends="baseLayout">
+      <put-attribute name="title"  value="Contact Us"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/contact/contactAppMasterForm.jsp"/>      
+  </definition> 
+ 
+   <definition name="contactAppMasterSuccessPage" extends="baseLayout">
+      <put-attribute name="title"  value="Contact Us"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/contact/contactAppMasterSuccess.jsp"/>      
+  </definition> 
+  
+  <!-- upload images -->
+  <definition name="uploadPage" extends="baseLayout">
+      <put-attribute name="title"  value="Upload"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/upload/upload.jsp"/>      
+  </definition> 
+ 
+   <definition name="successUploadPage" extends="baseLayout">
+      <put-attribute name="title"  value="Upload"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/upload/successUpload.jsp"/>      
+  </definition> 
+  
+  <!-- register dead and birth date -->
+  <definition name="registerDatesPage" extends="baseLayout">
+      <put-attribute name="title"  value="birth and death date"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/date/registerDates.jsp"/>      
+  </definition> 
+ 
+   <definition name="successRegisterDatesPage" extends="baseLayout">
+      <put-attribute name="title"  value="Upload"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/date/successRegisterDates.jsp"/>      
+  </definition> 
+  
+  <!-- web master page -->
+  <definition name="webMasterHomePage" extends="baseLayout">
+      <put-attribute name="title"  value="Register"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/others/webMasterHome.jsp"/>      
+  </definition> 
+    <definition name="registerUserSuccessPage" extends="baseLayout">
+      <put-attribute name="title"  value="Register"/>     
+      <put-attribute name="body"   value="/WEB-INF/view/goods/others/registerUserSuccess.jsp"/>      
+  </definition> 
+  
+</tiles-definitions>
